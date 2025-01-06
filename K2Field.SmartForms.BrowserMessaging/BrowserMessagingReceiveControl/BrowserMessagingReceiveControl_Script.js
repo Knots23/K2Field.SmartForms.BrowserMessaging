@@ -21,7 +21,7 @@
         getValue: function (objInfo) {
             //alert("getValue() for control " + objInfo.CurrentControlId);
             var instance = K2Field.SmartForms.BrowserMessaging.BrowserMessagingReceiveControl._getInstance(objInfo.CurrentControlId);
-            return instance.value;
+            return instance.getAttribute('value');
         },
 
         getDefaultValue: function (objInfo) {
@@ -35,7 +35,7 @@
             var oldValue = instance.value;
             //only change the value if it has actually changed, and then raise the OnChange event
             if (oldValue != objInfo.Value) {
-                instance.value = objInfo.Value;
+                instance.setAttribute('value', objInfo.Value);
                 raiseEvent(objInfo.CurrentControlId, 'Control', 'OnChange');
             }
         },
@@ -126,7 +126,7 @@
 
             switch (method) {
                 case "clearmessage":
-                    instance.value = "";
+                    instance.setAttribute('value', "");
                     $(instance).attr("messageid", "");
                     $(instance).attr("messagetype", "");
                     $(instance).attr("fromurl", "");

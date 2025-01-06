@@ -21,7 +21,7 @@
         getValue: function (objInfo) {
             //alert("getValue() for control " + objInfo.CurrentControlId);
             var instance = K2Field.SmartForms.BrowserMessaging.BrowserMessagingSendControl._getInstance(objInfo.CurrentControlId);
-            return instance.value;
+            return instance.getAttribute('value');
         },
 
         getDefaultValue: function (objInfo) {
@@ -34,12 +34,12 @@
             var instance = K2Field.SmartForms.BrowserMessaging.BrowserMessagingSendControl._getInstance(objInfo.CurrentControlId);
 
             // set value
-            instance.value = objInfo.Value;
+            instance.setValue('value', objInfo.Value);
 
             // broadcast to parent only - at the moment
             K2Field.SmartForms.BrowserMessaging.BrowserMessagingSendControl._sendPostMessageToParent(objInfo);
 
-            var oldValue = instance.value;
+            //var oldValue = instance.value;
             //only change the value if it has actually changed, and then raise the OnChange event
             //if (oldValue != objInfo.Value) {
             //    instance.value = objInfo.Value;
