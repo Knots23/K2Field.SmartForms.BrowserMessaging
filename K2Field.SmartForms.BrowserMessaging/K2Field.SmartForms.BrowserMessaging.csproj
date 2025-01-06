@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugRegisterCopyLocal|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\DebugRegisterCopyLocal\</OutputPath>
@@ -9,6 +9,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugCopyLocal|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -30,7 +32,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>K2Field.SmartForms.BrowserMessaging</RootNamespace>
     <AssemblyName>K2Field.SmartForms.BrowserMessaging</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -42,6 +44,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -50,6 +53,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -60,15 +64,18 @@
   <ItemGroup>
     <Reference Include="SourceCode.Forms.Client, Version=4.0.0.0, Culture=neutral, PublicKeyToken=16a2c5aaaa1b130d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\K2 blackpearl\bin\SourceCode.Forms.Client.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\K2\Host Server\Bin\SourceCode.Forms.Client.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SourceCode.Forms.Controls.Web.SDK, Version=4.0.0.0, Culture=neutral, PublicKeyToken=16a2c5aaaa1b130d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\K2 blackpearl\bin\SourceCode.Forms.Controls.Web.SDK.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\K2\K2 smartforms Runtime\bin\SourceCode.Forms.Controls.Web.SDK.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SourceCode.Forms.Controls.Web.Shared, Version=4.0.0.0, Culture=neutral, PublicKeyToken=16a2c5aaaa1b130d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\K2 blackpearl\bin\SourceCode.Forms.Controls.Web.Shared.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\K2\K2 smartforms Runtime\bin\SourceCode.Forms.Controls.Web.Shared.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -127,16 +134,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if "$(ConfigurationName)" == "DebugRegisterCopyLocal" (
-iisreset
-xcopy "$(TargetDir)$(TargetName).*" "C:\Program Files (x86)\K2 blackpearl\K2 SmartForms Designer\bin\" /y /r
-xcopy "$(TargetDir)$(TargetName).*" "C:\Program Files (x86)\K2 blackpearl\K2 SmartForms Runtime\bin\" /y /r
-"C:\Program Files (x86)\K2 blackpearl\Bin\controlutil.exe" register -assembly:"C:\Program Files (x86)\K2 blackpearl\K2 SmartForms Designer\bin\$(TargetName).dll"
-    Exit /b 0
-)
-ELSE if "$(ConfigurationName)" == "DebugCopyLocal" (
-xcopy "$(TargetDir)$(TargetName).*" "C:\Program Files (x86)\K2 blackpearl\K2 SmartForms Designer\bin\" /y /r
-xcopy "$(TargetDir)$(TargetName).*" "C:\Program Files (x86)\K2 blackpearl\K2 SmartForms Runtime\bin\" /y /r
+    <PostBuildEvent>if "$(ConfigurationName)" == "DebugCopyLocal" (
+xcopy "$(TargetDir)$(TargetName).*" "C:\Program Files\K2\K2 SmartForms Designer\bin\" /y /r
+xcopy "$(TargetDir)$(TargetName).*" "C:\Program Files\K2\K2 SmartForms Runtime\bin\" /y /r
     Exit /b 0
 )
 ELSE (
